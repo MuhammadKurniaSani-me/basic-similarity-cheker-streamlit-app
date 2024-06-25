@@ -161,14 +161,11 @@ def do_TF(corpus):
     }
 
 
-@st.cache_data
 def create_TF_df(_term_freqs):
     return pd.DataFrame(data=_term_freqs['df'].toarray(), columns=_term_freqs['features'])
 
 
 # create similarity dataframe
-
-@st.cache_data
 def create_sim(abs_ds):
     data_sim = np.zeros((abs_ds.shape[0], abs_ds.shape[0]))
     for d_utama_idx in range(1, abs_ds.shape[0]):
@@ -185,9 +182,9 @@ st.title('Text Similarity using RBM & Term Frequency')
 
 st.header('Masukkan Corpus')
 with st.form('input_corpus'):
-    text_1 = st.text_input(label='Masukkan abstrak 1',
+    text_1 = st.text_area(label='Masukkan abstrak 1',
                        placeholder='Masukkan abstrak yang akan dibandingkan')
-    text_2 = st.text_input(label='Masukkan abstrak 2',
+    text_2 = st.text_area(label='Masukkan abstrak 2',
                        placeholder='Masukkan abstrak sebagai pembanding')
     submit = st.form_submit_button('Cek kesamaan')
 
