@@ -162,7 +162,7 @@ def do_TF(corpus):
 
 
 def create_TF_df(_term_freqs):
-    return pd.DataFrame(data=_term_freqs['df'].toarray(), columns=_term_freqs['features'])
+    return pd.DataFrame(data=_term_freqs['df'].toarray(), columns=_term_freqs['features'], index=['Abstrak 1', 'Abstrak 2'])
 
 
 # create similarity dataframe
@@ -174,7 +174,7 @@ def create_sim(abs_ds):
                 100 - (mean_absolute_percentage_error(abs_ds[d_utama_idx], abs_ds[d_pembanding_idx]) * 100), 1) >= 0 else 0
             data_sim[d_pembanding_idx][d_utama_idx] = v_s
             data_sim[d_utama_idx][d_pembanding_idx] = v_s
-    return pd.DataFrame(data_sim)
+    return pd.DataFrame(data_sim, columns=['Abstrak 1', 'Abstrak 2'], index=['Abstrak 1', 'Abstrak 2'])
 
 
 # App flow
@@ -208,6 +208,6 @@ if submit:
     st.header('Hasil')
     st.subheader('Matriks term frequency', divider='rainbow')
     st.dataframe(tf_df)
-    st.subheader('Matriks kesamaan', divider='rainbow')
+    st.subheader('Matriks kesamaan (%)', divider='rainbow')
     st.dataframe(sim_df)
 
